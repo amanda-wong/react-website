@@ -1,5 +1,5 @@
 {
-    "name": "itsallaboutme-react",
+    "name": "jotto",
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
@@ -7,6 +7,9 @@
         "test": "jest --watchAll",
         "start": "webpack-dev-server --open --mode development",
         "build": "webpack --mode production"
+    },
+    "jest": {
+        "setupFilesAfterEnv": [ "<rootDir>/src/setupTests.js" ]
     },
     "keywords": [],
     "author": "",
@@ -16,6 +19,7 @@
         "@babel/preset-env": "^7.4.2",
         "@babel/preset-react": "^7.0.0",
         "babel-loader": "^8.0.5",
+        "check-prop-types": "^1.1.2",
         "css-loader": "^2.1.1",
         "html-loader": "^0.5.5",
         "html-webpack-plugin": "^3.2.0",
