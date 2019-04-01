@@ -4,12 +4,9 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "test": "jest --watchAll",
+        "test": "jest --config",
         "start": "webpack-dev-server --open --mode development",
         "build": "webpack --mode production"
-    },
-    "jest": {
-        "setupFilesAfterEnv": [ "<rootDir>/src/setupTests.js" ]
     },
     "keywords": [],
     "author": "",
