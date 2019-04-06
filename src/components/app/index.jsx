@@ -1,15 +1,19 @@
 import React, { Component } from "react";
-import { BrowserRouter } from "react-router-dom";
-import Header from "../Header/index.jsx";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import HomePage from "../../pages/HomePage/index.jsx";
+import AboutPage from "../../pages/AboutPage/index.jsx";
+import ContactPage from "../../pages/ContactPage/index.jsx";
 import "./style.css";
 
 class App extends Component {
     render () {
         return (
             <div id="app">
-                <BrowserRouter>
-                    <Header />
-                </BrowserRouter>
+                <Router>
+                    <Route path="/" exact component={HomePage} />
+                    <Route path="/about" exact component={AboutPage} />
+                    <Route path="/contact" exact component={ContactPage} />
+                </Router>
             </div>
         );
     }
