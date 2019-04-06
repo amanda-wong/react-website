@@ -5,14 +5,17 @@ import "./style.css";
 const Menu = () => {
     return (
         <div className="menu">
-            <MenuItem page="/" pageName="Home" />
-            <MenuItem page="/about" pageName="About" />
-            <MenuItem page="/blog" pageName="Blog" />
-            <MenuItem page="/contact" pageName="Contact" />
+            <MenuItem page="/about" pageName="about" /> 
+            <MenuItem page="/blog" pageName="blog" />
+            <MenuItem page="/contact" pageName="contact" />
         </div>
     );
 }
 
-// TODO: Identify menu items
+/* 
+About - Experience (links to Work), technologies,  / Personal
+Work - Snippets of work I've done, Problem, Solution, Technologies used
+Contact - Form
+*/
 
 export default Menu;
