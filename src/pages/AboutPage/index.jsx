@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import Header from "../../components/Header/index.jsx";
+import React from "react";
+import { Header } from "../../components";
 
 const AboutPage = () => {
     return (

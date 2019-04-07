@@ -1,9 +1,13 @@
-import React, { Component } from "react";
-import Header from "../../components/Header/index.jsx";
+import React from "react";
+import { Header, Page, PageSection } from "../../components";
+import "./style.css";
 
 const HomePage = () => {
     return (
-        <Header />
+        <Page>
+            <Header />
+            <PageSection />
+        </Page>
     )
 }
 
