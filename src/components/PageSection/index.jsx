@@ -6,5 +6,5 @@ export const PageSection = (props) => {
         <div className="section">
             {props.children}
         </div>
-    )
+    );
 }

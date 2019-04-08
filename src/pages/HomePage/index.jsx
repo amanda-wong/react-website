@@ -1,5 +1,5 @@
 import React from "react";
-import { Header, Page, PageSection } from "../../components";
+import { Header, Page, PageSection, InstagramGallery } from "../../components";
 import "./style.css";
 
 const HomePage = () => {
@@ -7,6 +7,7 @@ const HomePage = () => {
         <Page>
             <Header />
             <PageSection />
+            <InstagramGallery />
         </Page>
     )
 }
