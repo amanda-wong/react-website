@@ -20,13 +20,12 @@ export class InstagramGallery extends Component {
     }
 
     handleApiRequest(data) {    // only includes square posts
-        const posts = data.filter((post) => {
+        let posts = data.filter((post) => {
             const image = post.images.low_resolution;
             if (image.height === image.width) {
                 return post;
             }
-        });
-
+        }).slice(0, 12);
         this.setState({ posts });
     }
 
@@ -41,9 +40,7 @@ export class InstagramGallery extends Component {
             <div className="instagramGallery">
                 {posts.map((post, i) =>
                     <li className="post" key={i}>
-                        <div className="imageWrap">
-                            <img src={`${post.images.low_resolution.url}`} />
-                        </div>
+                        <img src={`${post.images.low_resolution.url}`} />
                     </li>)}
             </div>
         );
