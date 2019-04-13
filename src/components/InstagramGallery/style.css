@@ -1,0 +1,7 @@
+.instagramGallery {
+    display: flex;
+}
+
+.post {
+    list-style-type: none;
+}
