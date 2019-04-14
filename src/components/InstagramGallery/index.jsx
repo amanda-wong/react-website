@@ -5,7 +5,7 @@ import "./style.css";
 export class InstagramGallery extends Component {
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {};
     }
 
     componentDidMount() {
@@ -53,11 +53,22 @@ export class InstagramGallery extends Component {
 
     formatDate(date) {
         const dateCreated = new Date(parseInt(date) * 1000); // Instagram api stores in sec not ms
-        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        const months = [
+            'Jan', 'Feb', 'Mar',
+            'Apr', 'May', 'Jun',
+            'Jul', 'Aug', 'Sep',
+            'Oct', 'Nov', 'Dec'
+        ];
         const monthCreated = months[dateCreated.getMonth()];
         const dayCreated = dateCreated.getDate();
         const yearCreated = dateCreated.getFullYear();
         return `${monthCreated} ${dayCreated}, ${yearCreated}`;
+    }
+
+    handleOuterModalClick(e){
+        if (!this.post.contains(e.target)) {
+            this.setState({ postIndex: undefined });
+        }
     }
 
     buildModal(i) {
@@ -70,7 +81,7 @@ export class InstagramGallery extends Component {
         const caption = post.caption.text;
         const location = post.location
             ? <div className="location">
-                <Location size="20" colour="#656565" />
+                <Location size="18" colour="#656565" />
                 {post.location.name}
             </div>
             : null;
@@ -83,13 +94,13 @@ export class InstagramGallery extends Component {
         const datePosted = post.created_time;
 
         return (
-            <div className="modal">
-                <div className="postContainer">
+            <div className="modal" onClick={(e) => this.handleOuterModalClick(e)}>
+                <div className="postContainer" ref={ref => this.post = ref}>
+                    {location}
                     <div className="imageWrap">
                         <img src={imageUrl} />
                     </div>
                     <div className="postDetails">
-                        {location}
                         <p className="caption">{caption}</p>
                         <div className="postMeta">
                             {likesCount}
