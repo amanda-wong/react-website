@@ -22,6 +22,60 @@
     height: auto;
 }
 
+.modal {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.postContainer {
+    width: 300px;
+}
+
+.imageWrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.imageWrap img {
+    width: 100%;
+}
+
+.postDetails {
+    background-color: #fff;
+    padding: 15px;
+    color: #656565;
+}
+
+.location {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.locationIcon {
+    margin-right: 5px;
+}
+
+.caption {
+    margin: 0;
+    font-weight: 100;
+    line-height: 20px;
+}
+
+.postMeta {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+}
+
 @media (min-width: 768px) {
     .post {
         flex: 16.66%;
