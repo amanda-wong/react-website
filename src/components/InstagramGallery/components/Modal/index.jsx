@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Location, Close } from "../../../Icons";
+import { checkIfMobile } from "../../../../util";
 
 export class Modal extends Component {
     constructor(props){
@@ -21,17 +22,15 @@ export class Modal extends Component {
     }
 
     getMedia(post) {
-        const isMobile = window.innerWidth < 480;
-
         if (post.videos) {
-            const videoUrl = isMobile 
+            const videoUrl = checkIfMobile() 
                 ?  post.videos.low_resolution.url 
                 : post.videos.standard_resolution.url;
 
             return <video src={videoUrl} loop={true} autoPlay />
         } 
 
-        const imgUrl = isMobile 
+        const imgUrl = checkIfMobile() 
             ? post.images.low_resolution.url 
             : post.images.standard_resolution.url;
 
@@ -54,10 +53,14 @@ export class Modal extends Component {
                 {post.likes.count === 1 ? `${post.likes.count} like` : `${post.likes.count} likes`}</div>
             : null;
 
+        const closeIcon = !checkIfMobile() 
+            ? <Close size={24} colour="#fff" click={() => this.props.modalClose()}/>
+            : null;
+
         return (
             <div className="modal" onClick={() => this.props.modalClose()}>
                 <div className="postContainer" onClick={(e) => e.stopPropagation()}>
-                    <Close size={24} colour="#fff" click={() => this.props.modalClose()}/>
+                    {closeIcon}
                     {location}
                     <div className="mediaWrap">
                         {this.getMedia(post)}
