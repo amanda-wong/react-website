@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { Location } from "../Icons";
+import { Modal } from "./components/Modal.jsx";
 import "./style.css";
 
 export class InstagramGallery extends Component {
+
     constructor(props) {
         super(props);
         this.state = {};
@@ -18,6 +19,10 @@ export class InstagramGallery extends Component {
         })
             .then(response => response.json())
             .then(data => this.handleApiRequest(data.data));
+
+        // if (window) {
+        //     window.addEventListener("", this.handleResize.bind(this));
+        // }
     }
 
     handleApiRequest(data) {    // only includes square posts
@@ -47,77 +52,25 @@ export class InstagramGallery extends Component {
         );
     }
 
+    closeModal() {
+        this.setState({ postIndex: undefined });
+    }
+
     handlePostClick(i) {
         this.setState({ postIndex: i });
     }
 
-    formatDate(date) {
-        const dateCreated = new Date(parseInt(date) * 1000); // Instagram api stores in sec not ms
-        const months = [
-            'Jan', 'Feb', 'Mar',
-            'Apr', 'May', 'Jun',
-            'Jul', 'Aug', 'Sep',
-            'Oct', 'Nov', 'Dec'
-        ];
-        const monthCreated = months[dateCreated.getMonth()];
-        const dayCreated = dateCreated.getDate();
-        const yearCreated = dateCreated.getFullYear();
-        return `${monthCreated} ${dayCreated}, ${yearCreated}`;
-    }
-
-    handleOuterModalClick(e){
-        if (!this.post.contains(e.target)) {
-            this.setState({ postIndex: undefined });
-        }
-    }
-
-    buildModal(i) {
-        const post = this.state.posts[i];
-
-        const imageUrl = window.innerWidth < 480
-            ? post.images.low_resolution.url
-            : post.images.standard_resolution.url;
-
-        const caption = post.caption.text;
-        const location = post.location
-            ? <div className="location">
-                <Location size="18" colour="#656565" />
-                {post.location.name}
-            </div>
-            : null;
-
-        const likesCount = post.likes
-            ? <div className="likesCount">
-                {post.likes.count === 1 ? `${post.likes.count} like` : `${post.likes.count} likes`}</div>
-            : null;
-
-        const datePosted = post.created_time;
-
-        return (
-            <div className="modal" onClick={(e) => this.handleOuterModalClick(e)}>
-                <div className="postContainer" ref={ref => this.post = ref}>
-                    {location}
-                    <div className="imageWrap">
-                        <img src={imageUrl} />
-                    </div>
-                    <div className="postDetails">
-                        <p className="caption">{caption}</p>
-                        <div className="postMeta">
-                            {likesCount}
-                            <span>{this.formatDate(datePosted)}</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
-    }
-
     render() {
-        console.log("STATE: ", this.state)
+        console.log(this.state);
+        
         const instagramGallery = this.state.posts ? this.buildGallery() : null;
-        const { postIndex } = this.state;
-        const modal = postIndex ? this.buildModal(postIndex) : null;
-
+        const { postIndex, posts } = this.state;
+        const isValidNumber = postIndex > -1;
+        const currentPost = posts && isValidNumber ? posts[postIndex] : null;
+        const modal = isValidNumber
+            ? <Modal currentPost={currentPost}  modalClose={() => this.closeModal()} />
+            : null;
+            
         return (
             <>
                 {instagramGallery}
