@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Modal } from "./components/Modal.jsx";
+import { Modal } from "./components/Modal/index.jsx";
 import "./style.css";
 
 export class InstagramGallery extends Component {
@@ -32,6 +32,7 @@ export class InstagramGallery extends Component {
                 return post;
             }
         }).slice(0, 12);
+
         this.setState({ posts });
     }
 

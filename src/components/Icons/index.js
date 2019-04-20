@@ -1,3 +1,4 @@
-export * from "./components/heart.jsx";
-export * from "./components/location.jsx";
-export * from "./components/close.jsx";
+export * from "./components/Heart.jsx";
+export * from "./components/ArrowRight.jsx";
+export * from "./components/Location.jsx";
+export * from "./components/Close.jsx";

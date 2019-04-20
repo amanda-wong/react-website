@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Location } from "../../Icons";
+import { Location, Close } from "../../../Icons";
 
 export class Modal extends Component {
     constructor(props){
@@ -42,8 +42,6 @@ export class Modal extends Component {
         const post = this.props.currentPost;
         const datePosted = post.created_time;
         const caption = post.caption && post.caption.text; 
-        
-    
         const location = post.location
             ? <div className="location">
                 <Location size="18" colour="#656565" />
@@ -59,6 +57,7 @@ export class Modal extends Component {
         return (
             <div className="modal" onClick={() => this.props.modalClose()}>
                 <div className="postContainer" onClick={(e) => e.stopPropagation()}>
+                    <Close size={20} colour="#fff" click={() => this.props.modalClose()}/>
                     {location}
                     <div className="mediaWrap">
                         {this.getMedia(post)}
