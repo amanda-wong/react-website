@@ -20,13 +20,19 @@ export class InstagramGallery extends Component {
             .then(response => response.json())
             .then(data => this.handleApiRequest(data.data));
 
-        // if (window) {
-        //     window.addEventListener("", this.handleResize.bind(this));
-        // }
+        if (window) {
+            window.addEventListener("keydown", (e) => this.handleKeyPress(e));
+        }
+    }
+
+    handleKeyPress(e) {
+        if (e.keyCode === 27 && this.props.postIndex == undefined) {
+            this.closeModal();
+        }
     }
 
     handleApiRequest(data) {    // only includes square posts
-        let posts = data.filter((post) => {
+        let posts = data.filter(post => {
             const image = post.images.low_resolution;
             if (image.height === image.width) {
                 return post;
