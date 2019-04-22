@@ -60,7 +60,7 @@ export class Modal extends Component {
         return (
             <div className="modal" onClick={() => this.props.modalClose()}>
                 <div className="postContainer" onClick={(e) => e.stopPropagation()}>
-                    {closeIcon}
+                            <Close size={24} colour="#fff" click={this.props.modalClose} />
                     {location}
                     <div className="mediaWrap">
                         {this.getMedia(post)}
