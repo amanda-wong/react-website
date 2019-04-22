@@ -24,7 +24,7 @@ export class Modal extends Component {
     getPost() {
         const { currentPost } = this.props;
         const datePosted = currentPost.created_time;
-        const caption = currentPost.caption && 
+        const caption = currentPost.caption &&
             <p className="caption">{currentPost.caption.text}</p>;
 
         const location = currentPost.location
@@ -36,14 +36,15 @@ export class Modal extends Component {
 
         const likesCount = currentPost.likes
             ? <div className="likesCount">
-                {currentPost.likes.count === 1 
-                    ? `${currentPost.likes.count} like` 
+                {currentPost.likes.count === 1
+                    ? `${currentPost.likes.count} like`
                     : `${currentPost.likes.count} likes`}
             </div>
             : null;
 
         return (
-            <>
+            <div className="postContainer" onClick={(e) => e.stopPropagation()}>
+                {this.getControls()}
                 {location}
                 {this.getMedia(currentPost)}
                 <div className="postDetails">
@@ -53,21 +54,21 @@ export class Modal extends Component {
                         {this.formatDate(datePosted)}
                     </div>
                 </div>
-            </>
+            </div>
         )
     }
 
     getControls() {
         const { currentIndex } = this.props;
-        const arrowLeft = currentIndex - 1 !== -1 
-            ? <ArrowLeft size={32} prevClick={this.props.prevPost} /> 
+        const arrowLeft = currentIndex - 1 !== -1
+            ? <ArrowLeft size={32} prevClick={this.props.prevPost} />
             : null;
 
-        const arrowRight = currentIndex + 1 !== 12 
-            ? <ArrowRight size={32} nextClick={this.props.nextPost} /> 
+        const arrowRight = currentIndex + 1 !== 12
+            ? <ArrowRight size={32} nextClick={this.props.nextPost} />
             : null;
 
-        if (!checkIfMobile()){
+        if (!checkIfMobile()) {
             return (
                 <>
                     {arrowLeft}
@@ -105,12 +106,9 @@ export class Modal extends Component {
 
     render() {
         return (
-            <div className="modal" onClick={() => this.props.modalClose()}>
-                <div className="postContainer" onClick={(e) => e.stopPropagation()}>
-                    {this.getControls()}
-                    {this.getPost()}
-                </div>
-            </div >
+            <div className="modal" onClick={this.props.modalClose}>
+                {this.getPost()}
+            </div>
         );
     }
 };
