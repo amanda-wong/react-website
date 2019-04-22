@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Location, Close } from "../../../Icons";
+import { Location, Close, ArrowLeft, ArrowRight } from "../../../Icons";
 import { checkIfMobile } from "../../../../util";
 
 export class Modal extends Component {
@@ -38,10 +38,7 @@ export class Modal extends Component {
     }
 
     render() {
-        const post = this.props.currentPost;
-        const datePosted = post.created_time;
-        const caption = post.caption && post.caption.text; 
-        const location = post.location
+        const { currentPost, currentIndex } = this.props;
             ? <div className="location">
                 <Location size="18" colour="#656565" />
                 {post.location.name}
@@ -53,14 +50,20 @@ export class Modal extends Component {
                 {post.likes.count === 1 ? `${post.likes.count} like` : `${post.likes.count} likes`}</div>
             : null;
 
-        const closeIcon = !checkIfMobile() 
-            ? <Close size={24} colour="#fff" click={() => this.props.modalClose()}/>
-            : null;
+        const arrowLeft = currentIndex - 1 !== -1 ? <ArrowLeft size={32} prevClick={this.props.prevPost} /> : null;
+        const arrowRight = currentIndex + 1 !== 12 ? <ArrowRight size={32} nextClick={this.props.nextPost} /> : null;
 
         return (
             <div className="modal" onClick={() => this.props.modalClose()}>
                 <div className="postContainer" onClick={(e) => e.stopPropagation()}>
+                    {!checkIfMobile() ?
+                        <>
+                            {arrowLeft}
+                            {arrowRight}
                             <Close size={24} colour="#fff" click={this.props.modalClose} />
+                        </>
+                        : null
+                    }
                     {location}
                     <div className="mediaWrap">
                         {this.getMedia(post)}

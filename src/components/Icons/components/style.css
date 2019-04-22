@@ -3,3 +3,28 @@
     right: -30px;
     top: -30px;
 }
+
+.arrowLeft,
+.arrowRight {
+    position: absolute;
+    top: 46%;
+    fill: #656565;
+    background-color: #fff;
+    border-radius: 50%;
+}
+
+
+.arrowLeft:hover,
+.arrowRight:hover {
+    cursor: pointer;
+}
+
+.arrowLeft {
+    left: -100px;
+}
+
+.arrowRight {
+    right: -100px;
+}
+
+

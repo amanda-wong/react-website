@@ -57,6 +57,16 @@ export class InstagramGallery extends Component {
         this.setState({ postIndex: undefined });
     }
 
+    getPrevPost(index) {
+        const prevIndex = index - 1;
+        this.setState({ postIndex: prevIndex});
+    }
+
+    getNextPost(index) {
+        const nextIndex = index + 1;
+        this.setState({ postIndex: nextIndex});
+    }
+
     handlePostClick(i) {
         this.setState({ postIndex: i });
     }
@@ -69,7 +79,12 @@ export class InstagramGallery extends Component {
         const isValidNumber = postIndex > -1;
         const currentPost = posts && isValidNumber ? posts[postIndex] : null;
         const modal = isValidNumber
-            ? <Modal currentPost={currentPost}  modalClose={() => this.closeModal()} />
+            ? <Modal 
+                currentIndex={postIndex}
+                currentPost={currentPost}
+                modalClose={() => this.closeModal()} 
+                prevPost={() => this.getPrevPost(postIndex)} 
+                nextPost={() => this.getNextPost(postIndex)} />
             : null;
             
         return (
