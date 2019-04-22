@@ -71,14 +71,14 @@ export class InstagramGallery extends Component {
         this.setState({ postIndex: i });
     }
 
-    render() {
-        console.log(this.state);
-        
-        const instagramGallery = this.state.posts ? this.buildGallery() : null;
+    createModal() {
         const { postIndex, posts } = this.state;
-        const isValidNumber = postIndex > -1;
-        const currentPost = posts && isValidNumber ? posts[postIndex] : null;
-        const modal = isValidNumber
+        const hasPosts = postIndex > -1;
+        const currentPost = posts && hasPosts 
+            ? posts[postIndex] 
+            : null;
+
+        return hasPosts
             ? <Modal 
                 currentIndex={postIndex}
                 currentPost={currentPost}
@@ -86,11 +86,15 @@ export class InstagramGallery extends Component {
                 prevPost={() => this.getPrevPost(postIndex)} 
                 nextPost={() => this.getNextPost(postIndex)} />
             : null;
-            
+    }
+
+    render() {
+        console.log("<======== this.state =======>", this.state);
+        
         return (
             <>
-                {instagramGallery}
-                {modal}
+                {this.state.posts && this.buildGallery()}
+                {this.createModal()}
             </>
         );
     }

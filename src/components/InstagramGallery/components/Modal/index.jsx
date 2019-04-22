@@ -3,7 +3,7 @@ import { Location, Close, ArrowLeft, ArrowRight } from "../../../Icons";
 import { checkIfMobile } from "../../../../util";
 
 export class Modal extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
     }
 
@@ -21,26 +21,12 @@ export class Modal extends Component {
         return <span>{`${monthCreated} ${dayCreated}, ${yearCreated}`}</span>;
     }
 
-    getMedia(post) {
-        if (post.videos) {
-            const videoUrl = checkIfMobile() 
-                ?  post.videos.low_resolution.url 
-                : post.videos.standard_resolution.url;
-
-            return <video src={videoUrl} loop={true} autoPlay />
-        } 
-
-        const imgUrl = checkIfMobile() 
-            ? post.images.low_resolution.url 
-            : post.images.standard_resolution.url;
-
-        return <img src={imgUrl} />
-    }
-
-    render() {
-        const { currentPost, currentIndex } = this.props;
+    getPost() {
+        const { currentPost } = this.props;
         const datePosted = currentPost.created_time;
-        const caption = currentPost.caption && currentPost.caption.text; 
+        const caption = currentPost.caption && 
+            <p className="caption">{currentPost.caption.text}</p>;
+
         const location = currentPost.location
             ? <div className="location">
                 <Location size="18" colour="#656565" />
@@ -50,34 +36,79 @@ export class Modal extends Component {
 
         const likesCount = currentPost.likes
             ? <div className="likesCount">
-                {currentPost.likes.count === 1 ? `${currentPost.likes.count} like` : `${currentPost.likes.count} likes`}</div>
+                {currentPost.likes.count === 1 
+                    ? `${currentPost.likes.count} like` 
+                    : `${currentPost.likes.count} likes`}
+            </div>
             : null;
 
-        const arrowLeft = currentIndex - 1 !== -1 ? <ArrowLeft size={32} prevClick={this.props.prevPost} /> : null;
-        const arrowRight = currentIndex + 1 !== 12 ? <ArrowRight size={32} nextClick={this.props.nextPost} /> : null;
+        return (
+            <>
+                {location}
+                {this.getMedia(currentPost)}
+                <div className="postDetails">
+                    {caption}
+                    <div className="postMeta">
+                        {likesCount}
+                        {this.formatDate(datePosted)}
+                    </div>
+                </div>
+            </>
+        )
+    }
 
+    getControls() {
+        const { currentIndex } = this.props;
+        const arrowLeft = currentIndex - 1 !== -1 
+            ? <ArrowLeft size={32} prevClick={this.props.prevPost} /> 
+            : null;
+
+        const arrowRight = currentIndex + 1 !== 12 
+            ? <ArrowRight size={32} nextClick={this.props.nextPost} /> 
+            : null;
+
+        if (!checkIfMobile()){
+            return (
+                <>
+                    {arrowLeft}
+                    {arrowRight}
+                    <Close size={24} colour="#fff" click={this.props.modalClose} />
+                </>
+            )
+        }
+    }
+
+    getMedia(post) {
+        let media = null;
+
+        if (post.videos) {
+            const videoUrl = checkIfMobile()
+                ? post.videos.low_resolution.url
+                : post.videos.standard_resolution.url;
+
+            media = <video src={videoUrl} loop={true} autoPlay muted />
+
+        } else {
+            const imageUrl = checkIfMobile()
+                ? post.images.low_resolution.url
+                : post.images.standard_resolution.url;
+
+            media = <img src={imageUrl} />
+        }
+
+        return (
+            <div className="mediaWrap">
+                {media}
+            </div>
+        )
+    }
+
+    render() {
         return (
             <div className="modal" onClick={() => this.props.modalClose()}>
                 <div className="postContainer" onClick={(e) => e.stopPropagation()}>
-                    {!checkIfMobile() ?
-                        <>
-                            {arrowLeft}
-                            {arrowRight}
-                            <Close size={24} colour="#fff" click={this.props.modalClose} />
-                        </>
-                        : null
-                    }
-                    {location}
-                    <div className="mediaWrap">
-                        {this.getMedia(currentPost)}
-                    </div>
-                    <div className="postDetails">
-                        <p className="caption">{caption}</p>
-                        <div className="postMeta">
-                            {likesCount}
-                            {this.formatDate(datePosted)}
-                        </div>
-                    </div>
+                    {this.getControls()}
+                    {this.getPost()}
                 </div>
             </div >
         );
