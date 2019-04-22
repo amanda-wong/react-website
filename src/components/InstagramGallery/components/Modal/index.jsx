@@ -39,15 +39,18 @@ export class Modal extends Component {
 
     render() {
         const { currentPost, currentIndex } = this.props;
+        const datePosted = currentPost.created_time;
+        const caption = currentPost.caption && currentPost.caption.text; 
+        const location = currentPost.location
             ? <div className="location">
                 <Location size="18" colour="#656565" />
-                {post.location.name}
+                {currentPost.location.name}
             </div>
             : null;
 
-        const likesCount = post.likes
+        const likesCount = currentPost.likes
             ? <div className="likesCount">
-                {post.likes.count === 1 ? `${post.likes.count} like` : `${post.likes.count} likes`}</div>
+                {currentPost.likes.count === 1 ? `${currentPost.likes.count} like` : `${currentPost.likes.count} likes`}</div>
             : null;
 
         const arrowLeft = currentIndex - 1 !== -1 ? <ArrowLeft size={32} prevClick={this.props.prevPost} /> : null;
@@ -66,7 +69,7 @@ export class Modal extends Component {
                     }
                     {location}
                     <div className="mediaWrap">
-                        {this.getMedia(post)}
+                        {this.getMedia(currentPost)}
                     </div>
                     <div className="postDetails">
                         <p className="caption">{caption}</p>
