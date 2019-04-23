@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Location, Close, ArrowLeft, ArrowRight } from "../../../Icons";
-import { checkIfMobile } from "../../../../util";
+import { checkIfSmallScreen } from "../../../../util";
 
 export class Modal extends Component {
     constructor(props) {
@@ -68,7 +68,7 @@ export class Modal extends Component {
             ? <ArrowRight size={32} nextClick={this.props.nextPost} />
             : null;
 
-        if (!checkIfMobile()) {
+        if (!checkIfSmallScreen()) {
             return (
                 <>
                     {arrowLeft}
@@ -83,7 +83,7 @@ export class Modal extends Component {
         let media = null;
 
         if (post.videos) {
-            const videoUrl = checkIfMobile()
+            const videoUrl = checkIfSmallScreen()
                 ? post.videos.low_resolution.url
                 : post.videos.standard_resolution.url;
 

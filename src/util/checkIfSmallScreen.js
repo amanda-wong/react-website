@@ -1,0 +1,1 @@
+export const checkIfSmallScreen = () => window.innerWidth < 480;

@@ -1,1 +1,1 @@
-export * from "./checkIfMobile";
+export * from "./checkIfSmallScreen";
