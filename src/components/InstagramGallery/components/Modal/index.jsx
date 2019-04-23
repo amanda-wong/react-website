@@ -90,10 +90,7 @@ export class Modal extends Component {
             media = <video src={videoUrl} loop={true} autoPlay muted />
 
         } else {
-            const imageUrl = checkIfMobile()
-                ? post.images.low_resolution.url
-                : post.images.standard_resolution.url;
-
+            const imageUrl = post.images && post.images.standard_resolution.url;
             media = <img src={imageUrl} />
         }
 
