@@ -10,10 +10,8 @@ export class Modal extends Component {
     formatDate(date) {
         const dateCreated = new Date(parseInt(date) * 1000); // Instagram api stores in sec not ms
         const months = [
-            'Jan', 'Feb', 'Mar',
-            'Apr', 'May', 'Jun',
-            'Jul', 'Aug', 'Sep',
-            'Oct', 'Nov', 'Dec'
+            'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
         ];
         const monthCreated = months[dateCreated.getMonth()];
         const dayCreated = dateCreated.getDate();
