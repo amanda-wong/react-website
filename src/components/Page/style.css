@@ -1,9 +1,0 @@
-.page {
-    padding: 15px;
-}
-
-@media (min-width: 768px) {
-    .page {
-        padding: 30px;
-    }
-}
