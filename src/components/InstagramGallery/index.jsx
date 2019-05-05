@@ -26,12 +26,23 @@ export class InstagramGallery extends Component {
     }
 
     handleKeyPress(e) {
-        if (e.keyCode === 27 && this.props.postIndex == undefined) {
+        const noCurrentImage = this.props.postIndex == undefined;
+        const currentImageIndex = this.state.postIndex;
+        
+        if(e.keyCode === 39 && noCurrentImage) {
+            this.getNextPost(currentImageIndex) 
+        }
+        
+        if(e.keyCode === 37 && noCurrentImage) {
+            this.getPrevPost(currentImageIndex) 
+        }
+        
+        if (e.keyCode === 27 && noCurrentImage) {
             this.closeModal();
         }
     }
 
-    handleApiRequest(data) {    // only includes square posts
+    handleApiRequest(data) {    // filter to include square posts
         let posts = data.filter(post => {
             const image = post.images.low_resolution;
             if (image.height === image.width) {
@@ -52,7 +63,7 @@ export class InstagramGallery extends Component {
         return (
             <div className="instagramGallery">
                 {posts.map((post, i) =>
-                    <li className="post" key={i} onClick={() => this.handlePostClick(i)}>
+                    <li className="post" key={i} onClick={ () => this.handlePostClick(i) }>
                         <img src={`${post.images.low_resolution.url}`} />
                     </li>)}
             </div>
