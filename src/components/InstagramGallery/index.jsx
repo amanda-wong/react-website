@@ -1,6 +1,6 @@
 import React, { Component } from "react";
+import { getInstagramImages } from "../../providers/instagramProvider"
 import { Modal } from "./components/Modal/index.jsx";
-import config from "../../../config";
 import "./style.css";
 
 export class InstagramGallery extends Component {
@@ -11,10 +11,9 @@ export class InstagramGallery extends Component {
     }
 
     componentDidMount() {
-        fetch(`https://api.instagram.com/v1/users/self/media/recent?access_token=${config.instagramToken}`)
-            .then(response => response.json())
-            .then(data => this.handleApiRequest(data.data));
-
+        getInstagramImages()
+            .then(data => this.handleApiRequest(data));
+        
         if (window) {
             window.addEventListener("keydown", (e) => this.handleKeyPress(e));
         }
