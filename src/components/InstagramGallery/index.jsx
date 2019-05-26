@@ -11,12 +11,7 @@ export class InstagramGallery extends Component {
 
     componentDidMount() {
         const token = '36678597.c769071.94c9b79038254991a8af374f77cd33f1';
-        fetch(`https://api.instagram.com/v1/users/self/media/recent?access_token=${token}`, {
-            method: "GET",
-            mode: "cors",
-            cache: "no-cache",
-            referrer: "no-referrer"
-        })
+        fetch(`https://api.instagram.com/v1/users/self/media/recent?access_token=${token}`)
             .then(response => response.json())
             .then(data => this.handleApiRequest(data.data));
 
