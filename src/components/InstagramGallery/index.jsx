@@ -36,7 +36,7 @@ export class InstagramGallery extends Component {
         }
     }
 
-    handleApiRequest(data) {    // filter to include square posts
+    handleApiResponse(data) {    // filter to include square posts
         let posts = data.filter(post => {
             const image = post.images.low_resolution;
             if (image.height === image.width) {
