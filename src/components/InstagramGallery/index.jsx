@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Modal } from "./components/Modal/index.jsx";
+import config from "../../../config";
 import "./style.css";
 
 export class InstagramGallery extends Component {
@@ -10,8 +11,7 @@ export class InstagramGallery extends Component {
     }
 
     componentDidMount() {
-        const token = '36678597.c769071.94c9b79038254991a8af374f77cd33f1';
-        fetch(`https://api.instagram.com/v1/users/self/media/recent?access_token=${token}`)
+        fetch(`https://api.instagram.com/v1/users/self/media/recent?access_token=${config.instagramToken}`)
             .then(response => response.json())
             .then(data => this.handleApiRequest(data.data));
 
