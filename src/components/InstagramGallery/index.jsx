@@ -99,9 +99,7 @@ export class InstagramGallery extends Component {
             : null;
     }
 
-    render() {
-        console.log("<======== this.state =======>", this.state);
-        
+    render() {        
         return (
             <>
                 {this.state.posts && this.buildGallery()}
