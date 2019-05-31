@@ -1,6 +1,7 @@
 * {
     font-family: "Roboto", sans-serif;
     font-size: 14px;
+    margin: 0;
 }
 
 a,
@@ -14,5 +15,10 @@ a:hover {
 }
 
 h1, h2, h3, h4, h5 {
-    font-weight: 900;
+    font-weight: 700;
+    font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+    font-size: 26px;
 }

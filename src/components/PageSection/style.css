@@ -1,5 +1,13 @@
 .page-section {
-    background-color: red;
-    background-size: auto;
-    background-repeat: no-repeat;
+    background: 80% center / cover no-repeat black; 
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+}
+
+@media (min-width: 768px) {
+    .page-section {
+        padding: 45px;
+    }
 }

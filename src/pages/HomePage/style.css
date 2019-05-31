@@ -1,0 +1,17 @@
+.intro {
+    color: #fff;
+    font-size: 62px
+}
+
+@media (min-width: 768px) {
+    .intro {
+        font-size: 90px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .intro {
+        font-size: 101px;
+    }
+}
+
