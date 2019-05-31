@@ -12,7 +12,7 @@ export class InstagramGallery extends Component {
 
     componentDidMount() {
         getInstagramImages()
-            .then(data => this.handleApiRequest(data));
+            .then(data => this.handleApiResponse(data.data));
         
         if (window) {
             window.addEventListener("keydown", (e) => this.handleKeyPress(e));
